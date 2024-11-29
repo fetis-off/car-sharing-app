@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-roles-in-roles-table
+      author: fetis_off
+      changes:
+        - insert:
+            tableName: roles
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: role
+                  value: CUSTOMER
+        - insert:
+            tableName: roles
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: role
+                  value: MANAGER
