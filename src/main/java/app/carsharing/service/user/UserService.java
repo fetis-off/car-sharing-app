@@ -5,7 +5,7 @@ import app.carsharing.dto.user.UpdateUserRoleRequestDto;
 import app.carsharing.dto.user.UserRegistrationRequestDto;
 import app.carsharing.dto.user.UserResponseDto;
 import app.carsharing.exception.RegistrationException;
-import java.util.List;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface UserService {
@@ -15,5 +15,5 @@ public interface UserService {
 
     UserResponseDto updateUserProfile(UpdateUserProfileRequestDto requestDto, Long userId);
 
-    List<UserResponseDto> findAll(Pageable pageable);
+    Page<UserResponseDto> findAll(Pageable pageable);
 }
