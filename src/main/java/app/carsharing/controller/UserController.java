@@ -8,8 +8,8 @@ import app.carsharing.service.user.UserServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     private final UserServiceImpl userService;
 
-    @Operation(summary = "Update user role")
+    @Operation(summary = "Update user role", description = "Only for managers")
     @PreAuthorize("hasRole('MANAGER')")
     @PutMapping("/{id}/role")
     public UserResponseDto updateRole(@PathVariable Long id,
@@ -36,7 +36,7 @@ public class UserController {
         return userService.updateRole(id, requestDto);
     }
 
-    @Operation(summary = "Update user profile")
+    @Operation(summary = "Update user profile", description = "Only for managers")
     @PreAuthorize("hasRole('MANAGER')")
     @PutMapping("/me")
     public UserResponseDto updateProfile(@Valid @RequestBody UpdateUserProfileRequestDto requestDto,
@@ -46,7 +46,7 @@ public class UserController {
 
     @Operation(summary = "Get all user profiles")
     @GetMapping("/me")
-    public List<UserResponseDto> getAllUsersProfile(@PageableDefault(size = 20) Pageable pageable) {
+    public Page<UserResponseDto> getAllUsersProfile(@PageableDefault(size = 20) Pageable pageable) {
         return userService.findAll(pageable);
     }
 }

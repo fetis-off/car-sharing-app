@@ -11,9 +11,9 @@ import app.carsharing.model.Role;
 import app.carsharing.model.User;
 import app.carsharing.repository.role.RoleRepository;
 import app.carsharing.repository.user.UserRepository;
-import java.util.List;
 import java.util.Set;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -65,9 +65,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserResponseDto> findAll(Pageable pageable) {
-        return userRepository.findAll(pageable).stream()
-                .map(userMapper::toUserResponseDto)
-                .toList();
+    public Page<UserResponseDto> findAll(Pageable pageable) {
+        return userRepository.findAll(pageable)
+                .map(userMapper::toUserResponseDto);
     }
 }
