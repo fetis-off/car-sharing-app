@@ -33,7 +33,6 @@ public class Rental {
     @Column(nullable = false)
     private LocalDate returnDate;
 
-    @Column(nullable = false)
     private LocalDate actualDate;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
