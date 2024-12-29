@@ -43,6 +43,7 @@ public class RentalServiceImpl implements RentalService {
         }
         car.setInventory(car.getInventory() - 1);
         rental.setCar(car);
+        carRepository.save(car);
         RentalFullResponseDto responseDto = rentalMapper
                 .toRentalFullResponseDto(rentalRepository.save(rental));
         responseDto.setUserId(userId);
