@@ -1,5 +1,6 @@
 package app.carsharing.service.user;
 
+import app.carsharing.dto.user.UpdateTgChatIdRequestDto;
 import app.carsharing.dto.user.UpdateUserProfileRequestDto;
 import app.carsharing.dto.user.UpdateUserRoleRequestDto;
 import app.carsharing.dto.user.UserRegistrationRequestDto;
@@ -16,4 +17,6 @@ public interface UserService {
     UserResponseDto updateUserProfile(UpdateUserProfileRequestDto requestDto, Long userId);
 
     Page<UserResponseDto> findAll(Pageable pageable);
+
+    UserResponseDto updateTgChatId(Long id, UpdateTgChatIdRequestDto requestDto);
 }

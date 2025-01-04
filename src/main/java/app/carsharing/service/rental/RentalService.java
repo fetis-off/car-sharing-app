@@ -5,6 +5,8 @@ import app.carsharing.dto.rental.RentalFullResponseDto;
 import app.carsharing.dto.rental.RentalResponseDto;
 import app.carsharing.dto.rental.RentalSearchParametersDto;
 import app.carsharing.dto.rental.ReturnRentalRequestDto;
+import app.carsharing.model.Rental;
+import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -16,4 +18,6 @@ public interface RentalService {
     Page<RentalResponseDto> search(RentalSearchParametersDto parameters, Pageable pageable);
 
     RentalResponseDto returnRental(Long rentalId, ReturnRentalRequestDto requestDto, Long userId);
+
+    List<Rental> findOverdueRental(Long rentalId, Long userId);
 }

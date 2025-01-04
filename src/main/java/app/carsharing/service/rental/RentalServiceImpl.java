@@ -8,6 +8,7 @@ import app.carsharing.dto.rental.ReturnRentalRequestDto;
 import app.carsharing.exception.EntityNotFoundException;
 import app.carsharing.exception.RentalException;
 import app.carsharing.mapper.RentalMapper;
+import app.carsharing.message.Message;
 import app.carsharing.model.Rental;
 import app.carsharing.model.User;
 import app.carsharing.model.car.Car;
@@ -15,7 +16,9 @@ import app.carsharing.repository.car.CarRepository;
 import app.carsharing.repository.rental.RentalRepository;
 import app.carsharing.repository.rental.RentalSpecificationBuilder;
 import app.carsharing.repository.user.UserRepository;
+import app.carsharing.service.notification.TelegramNotificationService;
 import jakarta.transaction.Transactional;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,6 +33,7 @@ public class RentalServiceImpl implements RentalService {
     private final CarRepository carRepository;
     private final RentalRepository rentalRepository;
     private final RentalSpecificationBuilder specificationBuilder;
+    private final TelegramNotificationService notificationService;
 
     @Transactional
     @Override
@@ -48,6 +52,10 @@ public class RentalServiceImpl implements RentalService {
                 .toRentalFullResponseDto(rentalRepository.save(rental));
         responseDto.setUserId(userId);
 
+        if (user.getTgChatId() != null) {
+            notificationService.sendNotification(user.getTgChatId(),
+                    Message.getRentalMessageForTg(rental));
+        }
         return responseDto;
     }
 
@@ -88,6 +96,11 @@ public class RentalServiceImpl implements RentalService {
 
         responseDto.setActualReturnDate(requestDto.getActualDate());
         return responseDto;
+    }
+
+    @Override
+    public List<Rental> findOverdueRental(Long rentalId, Long userId) {
+        return List.of();
     }
 
     private Car findCarById(Long carId) {

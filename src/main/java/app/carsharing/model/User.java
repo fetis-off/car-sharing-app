@@ -42,6 +42,8 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
+    private Long tgChatId;
+
     @Column(nullable = false)
     private boolean isDeleted = false;
 
