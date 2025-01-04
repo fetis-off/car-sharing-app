@@ -1,5 +1,6 @@
 package app.carsharing.service.user;
 
+import app.carsharing.dto.user.UpdateTgChatIdRequestDto;
 import app.carsharing.dto.user.UpdateUserProfileRequestDto;
 import app.carsharing.dto.user.UpdateUserRoleRequestDto;
 import app.carsharing.dto.user.UserRegistrationRequestDto;
@@ -43,10 +44,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponseDto updateRole(Long id, UpdateUserRoleRequestDto requestDto) {
-        User user = userRepository.findById(id)
-                .orElseThrow(
-                        () -> new EntityNotFoundException("Couldn't find user with id: " + id)
-                );
+        User user = findUserById(id);
         Set<Role> roles = Set.of(roleRepository
                 .findByRole(Role.RoleName.valueOf(requestDto.getRole())));
         user.setRoles(roles);
@@ -56,10 +54,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponseDto updateUserProfile(UpdateUserProfileRequestDto requestDto,
                                              Long userId) {
-        User existedUser = userRepository.findById(userId).orElseThrow(
-                () -> new EntityNotFoundException("Couldn't find user with id: "
-                        + userId)
-        );
+        User existedUser = findUserById(userId);
         userMapper.updateUserFromDto(requestDto, existedUser);
         return userMapper.toUserResponseDto(userRepository.save(existedUser));
     }
@@ -68,5 +63,19 @@ public class UserServiceImpl implements UserService {
     public Page<UserResponseDto> findAll(Pageable pageable) {
         return userRepository.findAll(pageable)
                 .map(userMapper::toUserResponseDto);
+    }
+
+    @Override
+    public UserResponseDto updateTgChatId(Long id, UpdateTgChatIdRequestDto requestDto) {
+        User user = findUserById(id);
+        user.setTgChatId(requestDto.getTgChatId());
+        return userMapper.toUserResponseDto(userRepository.save(user));
+    }
+
+    private User findUserById(Long userId) {
+        return userRepository.findById(userId).orElseThrow(
+                () -> new EntityNotFoundException("Couldn't find user with id: "
+                        + userId)
+        );
     }
 }

@@ -1,2 +1,5 @@
-package app.carsharing.service;public interface NotificationService {
+package app.carsharing.service.notification;
+
+public interface NotificationService {
+    void sendNotification(Long chatId, String message);
 }

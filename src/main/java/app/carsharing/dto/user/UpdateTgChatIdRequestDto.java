@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class UpdateTgChatId {
+public class UpdateTgChatIdRequestDto {
     @NotNull(message = "Telegram chat ID can't be null")
     private Long tgChatId;
 }

@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-tg-chat-id-column-to-users-table
+      author: fetis_off
+      changes:
+        - addColumn:
+            tableName: users
+            columns:
+              - column:
+                  name: tg_chat_id
+                  type: BIGINT

@@ -7,13 +7,16 @@ import app.carsharing.dto.payment.PaymentStatusResponseDto;
 import app.carsharing.exception.EntityNotFoundException;
 import app.carsharing.exception.PaymentException;
 import app.carsharing.mapper.PaymentMapper;
+import app.carsharing.message.Message;
 import app.carsharing.model.Rental;
+import app.carsharing.model.User;
 import app.carsharing.model.payment.Payment;
 import app.carsharing.model.payment.PaymentStatus;
 import app.carsharing.model.payment.PaymentType;
 import app.carsharing.repository.car.CarRepository;
 import app.carsharing.repository.payment.PaymentRepository;
 import app.carsharing.repository.rental.RentalRepository;
+import app.carsharing.service.notification.TelegramNotificationService;
 import app.carsharing.service.payment.strategy.PaymentCalculateStrategy;
 import com.stripe.model.checkout.Session;
 import com.stripe.param.checkout.SessionCreateParams;
@@ -24,6 +27,8 @@ import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -34,12 +39,13 @@ public class PaymentServiceImpl implements PaymentService {
     private static final String CANCELED_LINK = "/payments/success/{CHECKOUT_SESSION_ID}";
     private static final String SUCCESS_LINK = "/payments/cancel/{CHECKOUT_SESSION_ID}";
     private static final String SESSION_NAME = "Car rental payment session";
-    private static final String COMPLETE_SESSION_STATUS = "complete";
+    private static final String COMPLETE_SESSION_STATUS = "paid";
     private final PaymentRepository paymentRepository;
     private final RentalRepository rentalRepository;
     private final PaymentCalculateStrategy paymentCalculateStrategy;
     private final PaymentMapper paymentMapper;
     private final CarRepository carRepository;
+    private final TelegramNotificationService notificationService;
 
     @Override
     public PaymentShortResponseDto createPayment(CreatePaymentRequestDto requestDto, Long userId) {
@@ -99,6 +105,14 @@ public class PaymentServiceImpl implements PaymentService {
             if (session.getStatus().equals(COMPLETE_SESSION_STATUS)) {
                 payment.setStatus(PaymentStatus.PAID);
                 paymentRepository.save(payment);
+                Authentication authentication = SecurityContextHolder
+                        .getContext()
+                        .getAuthentication();
+                User user = (User) authentication.getPrincipal();
+                if (user.getTgChatId() != null) {
+                    notificationService.sendNotification(user.getTgChatId(),
+                            Message.getSuccessfulPaymentMessageForTg(payment));
+                }
                 return paymentMapper.toStatusResponseDto(payment)
                         .setMessage("Successful payment");
             }
