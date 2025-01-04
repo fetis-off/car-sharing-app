@@ -1,0 +1,2 @@
+package app.carsharing.service.notification;public class TelegramNotificationService {
+}
