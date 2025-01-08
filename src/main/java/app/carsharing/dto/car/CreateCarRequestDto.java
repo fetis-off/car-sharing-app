@@ -5,9 +5,11 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import java.math.BigDecimal;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.hibernate.validator.constraints.Length;
 
 @Data
+@Accessors(chain = true)
 public class CreateCarRequestDto {
     @NotBlank(message = "Car model can't be null")
     @Length(max = 50, message = "Car model can't be longer than 50 symbols")

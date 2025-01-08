@@ -18,5 +18,7 @@ public interface CarService {
 
     CarFullResponseDto updateCarInventory(Long id, UpdateCarInventoryDto requestDto);
 
+    CarFullResponseDto findCarById(Long id);
+
     void deleteCar(Long id);
 }

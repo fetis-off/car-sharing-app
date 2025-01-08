@@ -47,21 +47,27 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public CarFullResponseDto updateCar(Long id, CreateCarRequestDto requestDto) {
-        Car existedCar = findCarById(id);
+        Car existedCar = findById(id);
         carMapper.updateCar(requestDto, existedCar);
         return carMapper.toCarFullResponseDto(carRepository.save(existedCar));
     }
 
     @Override
     public CarFullResponseDto updateCarInventory(Long id, UpdateCarInventoryDto requestDto) {
-        Car existedCar = findCarById(id);
+        Car existedCar = findById(id);
         existedCar.setInventory(requestDto.getInventory());
         return carMapper.toCarFullResponseDto(carRepository.save(existedCar));
     }
 
     @Override
+    public CarFullResponseDto findCarById(Long id) {
+        Car car = findById(id);
+        return carMapper.toCarFullResponseDto(car);
+    }
+
+    @Override
     public void deleteCar(Long id) {
-        Car existedCar = findCarById(id);
+        Car existedCar = findById(id);
         carRepository.delete(existedCar);
     }
 
@@ -70,7 +76,7 @@ public class CarServiceImpl implements CarService {
                 .anyMatch(t -> t.name().equalsIgnoreCase(carType));
     }
 
-    private Car findCarById(Long id) {
+    private Car findById(Long id) {
         return carRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("Car with id: "
                         + id + " not found"));
