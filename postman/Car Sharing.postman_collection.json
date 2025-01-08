@@ -1,0 +1,538 @@
+{
+	"info": {
+		"_postman_id": "8a1a6296-ea7b-4427-8e5b-0782e8d24d60",
+		"name": "Car Sharing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38158754"
+	},
+	"item": [
+		{
+			"name": "authentication",
+			"item": [
+				{
+					"name": "register user",
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "login user",
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "update user role",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImlhdCI6MTczMzM1MjEyNCwiZXhwIjoxNzMzMzUyNDI0fQ.6hjZ9K6jv2oOR4Wrxxo17yUBiCkdO8d7a2BBg5GPZ2Kda4kMQi6LOiz1BqzC_4I2",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"role\": \"CUSTOMER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/1/role",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1",
+								"role"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user profile",
+					"request": {
+						"method": "PUT",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "get all users profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/users/me",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Telegram chat id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsMjM1LmNvbSIsImlhdCI6MTczNTkwNzEwNCwiZXhwIjoxNzM1OTA3NDA0fQ.e0razIt9YkgPyolGWXULm1wDL0tzcE9Q6yuko5yg2P4PCFQa6_UXkldlrOrKxzl3",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tgChatId\": \"631695341\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/1/telegram",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1",
+								"telegram"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "car",
+			"item": [
+				{
+					"name": "create car",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsMjM1LmNvbSIsImlhdCI6MTczMzUyNTEwOCwiZXhwIjoxNzMzNTI1NDA4fQ.hYVOkoAD75IONbK1NwlkSkdrLHYmyVquzpoJ4MdOgWIHvLyYhW2bITIAWJUQp4ww",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"model\": \"a7\",\r\n  \"brand\": \"audi\",\r\n  \"carType\": \"Sasdf\",\r\n  \"inventory\": \"1\",\r\n  \"dailyFee\": \"12\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/cars",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cars"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all cars brief",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsMjM1LmNvbSIsImlhdCI6MTczMzY4MDkzNSwiZXhwIjoxNzMzNjgxMjM1fQ.dZsTiKIEp6tJ30hxa7v9VMcM55SE2BFiXegxRR702seWSDkICK1dfPY3B3y-lvtu",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/cars/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cars",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all cars full",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsMjM1LmNvbSIsImlhdCI6MTczMzY4MDkzNSwiZXhwIjoxNzMzNjgxMjM1fQ.dZsTiKIEp6tJ30hxa7v9VMcM55SE2BFiXegxRR702seWSDkICK1dfPY3B3y-lvtu",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/cars",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cars"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update car details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsMjM1LmNvbSIsImlhdCI6MTczMzY5NTk3OCwiZXhwIjoxNzMzNjk2Mjc4fQ.pSasrYsC2HhfmgZ2YsnY4-19ljxpUQ7bwPW9cLMbttodXSeQ-hDMx78F2LYuSV4W",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"model\": \"Sportage\",\r\n  \"brand\": \"KIA\",\r\n  \"carType\": \"SUV\",\r\n  \"inventory\": \"10\",\r\n  \"dailyFee\": \"11\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/cars/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cars",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update car inventory",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsMjM1LmNvbSIsImlhdCI6MTczMzY5NTk3OCwiZXhwIjoxNzMzNjk2Mjc4fQ.pSasrYsC2HhfmgZ2YsnY4-19ljxpUQ7bwPW9cLMbttodXSeQ-hDMx78F2LYuSV4W",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"inventory\": \"5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/cars/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cars",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete car by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/cars/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cars",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "rental",
+			"item": [
+				{
+					"name": "create rental",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/rentals",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rentals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get rental by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/rentals/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rentals",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search isActive",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "return rental",
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "payment",
+			"item": [
+				{
+					"name": "Create payment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsMjM1LmNvbSIsImlhdCI6MTczNTQyMzM3MCwiZXhwIjoxNzM1NDIzNjcwfQ.0q6kMFrDa5tzvXKxa1kAo4PiCNgAWO7-x1_9imM2HqDg2TxFrSVjZ6unKgLI2M3c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rentalId\": 5,\r\n    \"paymentType\": \"PAYMENT\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/payments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get payments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsMjM1LmNvbSIsImlhdCI6MTczNTQzMzk0OCwiZXhwIjoxNzM1NDM0MjQ4fQ.P2dBZVXDpt7vUxXeXBxwgQ_n6oo8HWFRLozktRuLKH1ZLRH0rBt4nLkzVJFELwzS",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/payments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "success payment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsMjM1LmNvbSIsImlhdCI6MTczNTQzNDU1OCwiZXhwIjoxNzM1NDM0ODU4fQ.SHtilWjeJDQ2Ruy-3omf2nQybvhejCF_x5OWXZKqrCadWrmm5qnf90ZQq0RryERZ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/payments/success/cs_test_a19H3fi0cCmjvOX4nkKY5wRVSv0phi0MdviizJbI4h0lS35IflZoO3RxD9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"payments",
+								"success",
+								"cs_test_a19H3fi0cCmjvOX4nkKY5wRVSv0phi0MdviizJbI4h0lS35IflZoO3RxD9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cancel payment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsMjM1LmNvbSIsImlhdCI6MTczNTQzNDU1OCwiZXhwIjoxNzM1NDM0ODU4fQ.SHtilWjeJDQ2Ruy-3omf2nQybvhejCF_x5OWXZKqrCadWrmm5qnf90ZQq0RryERZ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/payments/cancel/cs_test_a1RaMRb5tDvon6AnFp4fdt16q7Ap9AOBYSKIrMhrd5ZdK0l9BV7V09p9Wo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"payments",
+								"cancel",
+								"cs_test_a1RaMRb5tDvon6AnFp4fdt16q7Ap9AOBYSKIrMhrd5ZdK0l9BV7V09p9Wo"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
