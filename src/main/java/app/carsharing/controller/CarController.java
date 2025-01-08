@@ -8,6 +8,7 @@ import app.carsharing.service.car.CarServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,6 +34,7 @@ public class CarController {
     private final CarServiceImpl carService;
 
     @Operation(summary = "Create a new car", description = "Only for managers")
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     public CarFullResponseDto createCar(@Valid @RequestBody CreateCarRequestDto requestDto) {
@@ -60,6 +62,12 @@ public class CarController {
             @PathVariable Long id,
             @Valid @RequestBody CreateCarRequestDto requestDto) {
         return carService.updateCar(id, requestDto);
+    }
+
+    @GetMapping("/{id}")
+    @Operation(summary = "Find a car by id", description = "Returns a full info about car by id")
+    public CarFullResponseDto getCarById(@PathVariable @Positive Long id) {
+        return carService.findCarById(id);
     }
 
     @PreAuthorize("hasRole('ADMIN')")

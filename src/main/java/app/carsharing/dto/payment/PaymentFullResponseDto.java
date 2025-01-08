@@ -4,7 +4,9 @@ import app.carsharing.model.payment.PaymentStatus;
 import app.carsharing.model.payment.PaymentType;
 import java.math.BigDecimal;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
+@Accessors(chain = true)
 @Data
 public class PaymentFullResponseDto {
     private Long id;
