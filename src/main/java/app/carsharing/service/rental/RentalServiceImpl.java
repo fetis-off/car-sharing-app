@@ -8,7 +8,6 @@ import app.carsharing.dto.rental.ReturnRentalRequestDto;
 import app.carsharing.exception.EntityNotFoundException;
 import app.carsharing.exception.RentalException;
 import app.carsharing.mapper.RentalMapper;
-import app.carsharing.message.Message;
 import app.carsharing.model.Rental;
 import app.carsharing.model.User;
 import app.carsharing.model.car.Car;
@@ -17,7 +16,7 @@ import app.carsharing.repository.rental.RentalRepository;
 import app.carsharing.repository.rental.RentalSpecificationBuilder;
 import app.carsharing.repository.user.UserRepository;
 import app.carsharing.service.notification.TelegramNotificationService;
-import jakarta.transaction.Transactional;
+import app.carsharing.utils.Message;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -35,7 +34,6 @@ public class RentalServiceImpl implements RentalService {
     private final RentalSpecificationBuilder specificationBuilder;
     private final TelegramNotificationService notificationService;
 
-    @Transactional
     @Override
     public RentalFullResponseDto createRental(CreateRentalRequestDto requestDto, Long userId) {
         Rental rental = rentalMapper.toRental(requestDto);

@@ -15,7 +15,6 @@ public class CreateRentalRequestDto {
     @NotNull(message = "Return date can't be null")
     private LocalDate returnDate;
 
-    @NotNull(message = "Car id can't be null")
     @Positive(message = "Car id should be positive")
     private Long carId;
 }
