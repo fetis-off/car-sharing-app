@@ -13,6 +13,7 @@ import app.carsharing.dto.car.UpdateCarInventoryDto;
 import app.carsharing.exception.EntityNotFoundException;
 import app.carsharing.mapper.CarMapper;
 import app.carsharing.model.car.Car;
+import app.carsharing.model.car.CarType;
 import app.carsharing.repository.car.CarRepository;
 import app.carsharing.service.car.CarServiceImpl;
 import java.util.List;
@@ -41,7 +42,7 @@ public class CarServiceTest {
     void createCar_ShouldCreateCar_WhenCarTypeIsValid() {
         // Arrange
         CreateCarRequestDto requestDto = new CreateCarRequestDto();
-        requestDto.setCarType("SUV");
+        requestDto.setCarType(CarType.valueOf("SUV"));
         Car car = new Car();
         CarFullResponseDto responseDto = new CarFullResponseDto();
 
@@ -55,18 +56,6 @@ public class CarServiceTest {
         // Assert
         assertNotNull(result);
         verify(carRepository).save(car);
-    }
-
-    @Test
-    void createCar_ShouldThrowException_WhenCarTypeIsInvalid() {
-        // Arrange
-        CreateCarRequestDto requestDto = new CreateCarRequestDto();
-        requestDto.setCarType("INVALID_TYPE");
-
-        // Act & Assert
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () -> carService.createCar(requestDto));
-        assertTrue(exception.getMessage().contains("Invalid car type"));
     }
 
     @Test

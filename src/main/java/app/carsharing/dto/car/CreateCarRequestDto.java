@@ -1,5 +1,6 @@
 package app.carsharing.dto.car;
 
+import app.carsharing.model.car.CarType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -19,11 +20,9 @@ public class CreateCarRequestDto {
     @Length(max = 50, message = "Car brand can't be longer than 50 symbols")
     private String brand;
 
-    @NotBlank(message = "Car type can't be null")
-    @Length(max = 50, message = "Car type can't be longer than 50 symbols")
-    private String carType;
+    @NotNull(message = "Car type can't be null")
+    private CarType carType;
 
-    @NotNull(message = "The inventory field can't be null")
     @Positive(message = "The inventory field should be positive")
     private int inventory;
 

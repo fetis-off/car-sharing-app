@@ -72,7 +72,7 @@ public final class TestUtil {
         return new CreateCarRequestDto()
                 .setModel(responseDto.getModel())
                 .setBrand(responseDto.getBrand())
-                .setCarType(responseDto.getCarType())
+                .setCarType(CarType.valueOf(responseDto.getCarType()))
                 .setInventory(responseDto.getInventory())
                 .setDailyFee(responseDto.getDailyFee());
     }
@@ -81,7 +81,7 @@ public final class TestUtil {
         return new CreateCarRequestDto()
                 .setModel("Cayenne")
                 .setBrand("Porshe")
-                .setCarType("SUV")
+                .setCarType(CarType.valueOf("SUV"))
                 .setInventory(12)
                 .setDailyFee(BigDecimal.valueOf(100).setScale(2));
     }
@@ -91,7 +91,7 @@ public final class TestUtil {
         return new CarFullResponseDto()
                 .setModel(requestDto.getModel())
                 .setBrand(requestDto.getBrand())
-                .setCarType(requestDto.getCarType())
+                .setCarType(String.valueOf(requestDto.getCarType()))
                 .setInventory(requestDto.getInventory())
                 .setDailyFee(requestDto.getDailyFee());
     }

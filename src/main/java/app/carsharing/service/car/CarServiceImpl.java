@@ -7,9 +7,7 @@ import app.carsharing.dto.car.UpdateCarInventoryDto;
 import app.carsharing.exception.EntityNotFoundException;
 import app.carsharing.mapper.CarMapper;
 import app.carsharing.model.car.Car;
-import app.carsharing.model.car.CarType;
 import app.carsharing.repository.car.CarRepository;
-import java.util.Arrays;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,12 +21,6 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public CarFullResponseDto createCar(CreateCarRequestDto requestDto) {
-        if (!isValidCarType((requestDto.getCarType()))) {
-            throw new IllegalArgumentException("Invalid car type: "
-                    + requestDto.getCarType()
-                    + ". Allowed values: "
-                    + Arrays.toString(CarType.values()));
-        }
         Car car = carMapper.toCar(requestDto);
         return carMapper.toCarFullResponseDto(carRepository.save(car));
     }
@@ -69,11 +61,6 @@ public class CarServiceImpl implements CarService {
     public void deleteCar(Long id) {
         Car existedCar = findById(id);
         carRepository.delete(existedCar);
-    }
-
-    private boolean isValidCarType(String carType) {
-        return Arrays.stream(CarType.values())
-                .anyMatch(t -> t.name().equalsIgnoreCase(carType));
     }
 
     private Car findById(Long id) {
