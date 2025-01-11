@@ -12,7 +12,7 @@ and payment handling for an efficient and automated car-sharing experience.
 - **Spring MVC**: Facilitates building web applications and RESTful APIs using the MVC pattern.
 - **Spring Security**: Secures the application with JWT-based authentication.
 - **Spring Data JPA**: Handles interactions with the relational database using Hibernate.
-- **MySQL**: Relational database for storing books, users, and order information.
+- **MySQL**: Relational database for storing cars, users, rental and payment information.
 - **Maven**: Builds and manages project dependencies.
 - **JUnit 5**: A testing framework for unit and integration tests.
 - **Lombok**: Reduces boilerplate code with annotations for getters, setters, constructors, etc.
